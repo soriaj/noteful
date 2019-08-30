@@ -1,4 +1,4 @@
-## Noteful App v 0.1
+# Noteful App v 0.1
 
 Noteful app is used to keep track of all you notes. 
 
