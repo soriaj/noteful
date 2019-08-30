@@ -1,0 +1,37 @@
+.nav {
+   /* background-color: #c5c5c5cc; */
+   color: #fff;
+   grid-area: sidebar;
+   /* height: 100%; */
+   /* overflow: auto; */
+}
+/* .nav > ul > li{
+   list-style: none;
+   padding: 5px;
+   margin-bottom: 5px;
+   
+} */
+.nav_notes_add {
+   list-style: none;
+   padding: 5px;
+   margin-bottom: 5px;
+   background-color: rgb(131, 131, 131);
+   border-bottom: 2px outset rgba(131, 131, 131, 0.335);
+}
+.nav_notes_add > a {
+   text-decoration: none;
+   color: white;
+}
+.sidebarpage__foldername {
+   color: #b5b3b3;
+   font-family: var(--custom-font);
+   height: 50vh;
+   margin: 0 0 0 auto;
+   text-orientation: upright;
+   width: 75px;
+   writing-mode: vertical-lr;
+}
+.sidebarpage_back{
+   margin: 0 15px;
+   width: 65%;
+}

@@ -1,0 +1,9 @@
+.header {
+   text-align: center;
+   background-color: rgba(61, 141, 195, 0.856);
+   color: white;
+}
+h1 > a {
+   text-decoration: none;
+   color: white;
+}

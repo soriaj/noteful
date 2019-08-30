@@ -1,0 +1,11 @@
+.note_name a{
+   text-decoration: none;
+   color: Blue;
+}
+button{
+   padding: 5px;
+   margin-bottom: 15px;
+   border-radius: 5px;
+   background-color: rgba(128, 130, 131, 0.842);
+   color: white;
+}

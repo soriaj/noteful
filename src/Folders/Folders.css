@@ -1,0 +1,11 @@
+.nav_notes_list {
+   list-style: none;
+   padding: 5px;
+   margin-bottom: 5px;
+   background-color: rgb(131, 131, 131);
+   border-bottom: 2px outset rgba(131, 131, 131, 0.335);
+}
+.nav_notes_list > a {
+   text-decoration: none;
+   color: white;
+}
