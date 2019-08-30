@@ -1,6 +1,9 @@
 .note_name a{
    text-decoration: none;
-   color: Blue;
+   color: rgb(56, 56, 56);
+}
+.note_name a:hover{
+   color: rgb(14, 17, 221);
 }
 button{
    padding: 5px;

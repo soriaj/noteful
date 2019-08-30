@@ -5,7 +5,7 @@ import { faUndo } from "@fortawesome/free-solid-svg-icons";
 
 class SidebarPage extends Component{
    render(){
-      console.log('sidebarpage', this.props)
+      // console.log('sidebarpage', this.props)
       const { history, folder } = this.props
       return(
          <div className='.nav_notes_add'>

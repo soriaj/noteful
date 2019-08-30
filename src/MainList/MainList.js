@@ -16,7 +16,7 @@ class Main extends Component{
          <section>
             <ul>
                {this.props.notes.map(note => 
-                  <li key={note.id}>
+                  <li key={note.id} className='note_item'>
                      <Note
                         id={note.id}
                         name={note.name}
