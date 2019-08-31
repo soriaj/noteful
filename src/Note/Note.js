@@ -12,7 +12,7 @@ class Note extends Component{
    //    onDeleteNote: () => {},
    // }
    static contextType = NotesContext
-   handleStuff = () => {
+   handleStuff(){
       console.log('you clicked the button')
    }
    handleDelete = event => {
@@ -51,7 +51,7 @@ class Note extends Component{
             <button 
                className='Note__delete' 
                type='button'
-               onClick={() => this.handleStuff}>
+               onClick={() => this.handleStuff()}>
                <FontAwesomeIcon icon={faTrashAlt} />
                {' '}
                Remove
