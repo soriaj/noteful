@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUndo } from "@fortawesome/free-solid-svg-icons";
+import NotesContext from '../NoteContext'
 
 
 class SidebarPage extends Component{
+   static contextType = NotesContext
    render(){
-      // console.log('sidebarpage', this.props)
-      const { history, folder } = this.props
+      const { history } = this.props
+      const { noteId } = this.props.match.params
+      const { notes, folders } = this.context
+      const note = notes.find(note => note.id === noteId) 
+      const folderData = folders.find(folder => folder.id === note.folderId)
+      // console.log('Sidebar FolderData: ', folderData)
       return(
          <div className='.nav_notes_add'>
-            {folder && (
+            {folderData && (
                <h3 className='sidebarpage__foldername'>
-                  {folder.name}
+                  {folderData.name}
                </h3>
             )}
             <button

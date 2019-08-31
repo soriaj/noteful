@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SidebarList from './SidebarList/SiderbarList';
 import SidebarPage from './SidebarPage/SidebarPage';
 import Header from './Header/Header'
 import MainList from './MainList/MainList';
-import MainPage from './MainPage/MainPage'
-import NOTES from './NOTES'
+import MainPage from './MainPage/MainPage';
+import NotesContext from './NoteContext';
+// import NOTES from './NOTES'
+import Config from './Config';
 import './App.css'
 
 class App extends Component {
@@ -17,77 +19,87 @@ class App extends Component {
     }
   }
   componentDidMount(){
-    setTimeout(() => this.setState(NOTES), 100)
+    Promise.all([
+        fetch(`${Config.API_ENDPOINT}/folders`),
+        fetch(`${Config.API_ENDPOINT}/notes`)
+      ])
+      .then(([folderRes, notesRes]) => {
+        if(!folderRes.ok)
+          return folderRes.json().then(e => Promise.reject(e));
+        if(!notesRes.ok)
+          return notesRes.json().then(e => Promise.reject(e));
+
+        return Promise.all([folderRes.json(), notesRes.json()]);
+      })
+      .then(([folders, notes]) => {
+        this.setState({folders, notes});
+      })
+      .catch(error => {
+        console.log({error})
+      })
+  }
+  deleteNotes = noteId => {
+    const newNotes = this.state.notes.filter(note => note.id !== noteId)
+    console.log(`You just deleted ${noteId}`)
+    this.setState({
+      notes: newNotes
+    });
+  }
+  renderSidebarRoutes(){
+    // const { notes, folders } = this.state;
+    return (
+        <>
+          {['/', '/folder/:folderId'].map(path => (
+              <Route
+                  exact path={path}
+                  key={path}
+                  component={SidebarList}
+              />
+          ))}
+          <Route
+            path='/note/:noteId'
+            component={SidebarPage}
+          />
+          <Route path="/add-folder" component={SidebarPage} />
+          <Route path="/add-note" component={SidebarPage} />
+      </>
+    );
+  }
+  renderMainRoutes(){
+    return(
+      <>
+        {['/', '/folder/:folderId'].map(path => (
+          <Route
+            exact path={path}
+            key={path}
+            component={MainList}
+          />
+        ))}
+        <Route 
+          path='/note/:noteId'
+          component={MainPage}
+        />
+      </>
+    )
   }
   render(){
-    const { notes, folders } = this.state;
-    const getNotesForFolder = (notes=[], folderId) => (
-      (!folderId)
-        ? notes
-        : notes.filter(note => note.folderId === folderId)
-    )
+    const renderSidebarRoutes = this.renderSidebarRoutes()
+    const renderMainRoutes = this.renderMainRoutes()
+    const contextValue = {
+      notes: this.state.notes,
+      folders: this.state.folders,
+      deleteNotes: this.deleteNotes,
+    }
     return (
       <Router>
-        <div className='App'>
-          <Header />
-          <Switch>
-            <Route exact path='/'
-              render={routeProps => {
-                const { folderId } = routeProps.match.params
-                const notesForFolder = getNotesForFolder(notes, folderId)
-                return(
-                  <>
-                  <SidebarList
-                    folders={folders}
-                    notes={notes}
-                    {...routeProps}
-                  />
-                    <MainList
-                      {...routeProps}
-                      notes={notesForFolder}
-                      modified={notes.modified}
-                    />
-                  </>
-                )
-              }}
-            />
-            <Route path='/folder/:folderId' 
-              render={routeProps => {
-                const { folderId } = routeProps.match.params
-                const notesForFolder = getNotesForFolder(notes, folderId)
-                return(
-                  <>
-                    <SidebarList
-                      folders={folders}
-                      notes={notes}
-                      {...routeProps}
-                    />
-                    <MainList
-                      {...routeProps}
-                      notes={notesForFolder}
-                      modified={notes.modified}
-                    />
-                  </>
-                )
-              }}
-            />
-            <Route
-              path='/note/:noteId'
-              render={routeProps => {
-                const { noteId } = routeProps.match.params
-                const note = notes.find(note => note.id === noteId) 
-                const folderData = folders.find(folder => folder.id === note.folderId)
-                return(
-                  <>
-                    <SidebarPage {...routeProps} folder={folderData} />
-                    <MainPage {...routeProps} note={note} />
-                  </>
-                )
-              }}
-            />
-          </Switch>
-        </div>
-      </Router> 
+        <NotesContext.Provider value={contextValue}>
+          <div className='App'>
+            <Header />
+            {renderSidebarRoutes}
+            {renderMainRoutes}
+          </div>
+        </NotesContext.Provider>
+      </Router>
     );
   }
 }

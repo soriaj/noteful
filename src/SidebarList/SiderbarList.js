@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
-import './SidebarList.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
+import NotesContext from '../NoteContext';
+import './SidebarList.css'
 
 class SidebarList extends Component{
-   static defaultProps = {
-      folders: []
-   }
+   static contextType = NotesContext;
    render(){
       // console.log('Sidebar props: ', this.props.folders)
-      const { folders } = this.props
+      // const { folders } = this.props
+      // console.log('SidebarList context: ', this.context.folders)
+      const { folders=[] } = this.context
       return(
          <nav role='navigation' className='nav'>
             {folders.map(folder => 
