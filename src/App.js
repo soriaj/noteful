@@ -41,9 +41,11 @@ class App extends Component {
   deleteNotes = noteId => {
     const newNotes = this.state.notes.filter(note => note.id !== noteId)
     console.log(`You just deleted ${noteId}`)
-    this.setState({
-      notes: newNotes
-    });
+    setTimeout(() => {
+      this.setState({
+        notes: newNotes
+      })
+    }, 200)
   }
   renderSidebarRoutes(){
     // const { notes, folders } = this.state;

@@ -8,14 +8,14 @@ import Config from '../Config'
 import './Note.css'
 
 class Note extends Component{
-   // static defaultProps = {
-   //    onDeleteNote: () => {},
-   // }
+   static defaultProps = {
+      onDeleteNote: () => {},
+   }
    static contextType = NotesContext
    handleStuff(){
       console.log('you clicked the button')
    }
-   handleDelete = event => {
+   handleDelete = (event) => {
       event.preventDefault()
       const noteId = this.props.id
 
@@ -27,12 +27,12 @@ class Note extends Component{
       })
       .then(res => {
          if(!res.ok)
-            return res.json().then(e => Promise.reject(e))
+            // return res.json().then(e => Promise.reject(e))
          return res.json()
       })
       .then(() => {
          this.context.deleteNotes(noteId)
-         this.props.onDeleteNote(noteId)
+         this.props.onDeleteNote()
       })
       .catch(error => {
          console.log({error})
@@ -40,7 +40,7 @@ class Note extends Component{
    }
    render(){
       // console.log('Note props:', this.props)
-      console.log('Notes context: ', this.context)
+      // console.log('Notes context: ', this.context)
       return(
          <>
             <h2 className='note_name'>
@@ -49,9 +49,10 @@ class Note extends Component{
                </Link>
             </h2>
             <button 
-               className='Note__delete' 
+               className='Note__delete'
                type='button'
-               onClick={() => this.handleStuff()}>
+               onClick={(e) => this.handleDelete(e)}
+            >
                <FontAwesomeIcon icon={faTrashAlt} />
                {' '}
                Remove
@@ -66,9 +67,6 @@ class Note extends Component{
                      </Moment>
                   </span>
                </div>
-            </div>
-            <div>
-               <p>{}</p>
             </div>
          </>  
       )
