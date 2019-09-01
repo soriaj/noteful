@@ -18,25 +18,45 @@ class App extends Component {
       notes: []
     }
   }
+  // componentDidMount(){
+  //   Promise.all([
+  //       fetch(`${Config.API_ENDPOINT}/folders`),
+  //       fetch(`${Config.API_ENDPOINT}/notes`)
+  //     ])
+  //     .then(([folderRes, notesRes]) => {
+  //       if(!folderRes.ok)
+  //         return folderRes.json().then(e => Promise.reject(e));
+  //       if(!notesRes.ok)
+  //         return notesRes.json().then(e => Promise.reject(e));
+
+  //       return Promise.all([folderRes.json(), notesRes.json()]);
+  //     })
+  //     .then(([folders, notes]) => {
+  //       this.setState({folders, notes});
+  //     })
+  //     .catch(error => {
+  //       console.log({error})
+  //     })
+  // }
   componentDidMount(){
     Promise.all([
-        fetch(`${Config.API_ENDPOINT}/folders`),
-        fetch(`${Config.API_ENDPOINT}/notes`)
-      ])
-      .then(([folderRes, notesRes]) => {
-        if(!folderRes.ok)
-          return folderRes.json().then(e => Promise.reject(e));
-        if(!notesRes.ok)
-          return notesRes.json().then(e => Promise.reject(e));
-
-        return Promise.all([folderRes.json(), notesRes.json()]);
+      fetch(`${Config.API_ENDPOINT}/folders`).then(res => {
+        if(!res.ok)
+          throw new Error('Something went wrong in folders')
+        return res.json()
+      }),
+      fetch(`${Config.API_ENDPOINT}/notes`).then(res => {
+        if(!res.ok)
+          throw new Error('Something went wrong in notes')
+        return res.json()
       })
-      .then(([folders, notes]) => {
-        this.setState({folders, notes});
-      })
-      .catch(error => {
-        console.log({error})
-      })
+    ])
+    .then(([folders, notes]) => {
+      this.setState({folders, notes})
+    })
+    .catch(err => {
+      console.error(err)
+    })
   }
   deleteNotes = noteId => {
     const newNotes = this.state.notes.filter(note => note.id !== noteId)
@@ -107,3 +127,4 @@ class App extends Component {
 }
 
 export default App;
+          

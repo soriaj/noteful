@@ -1,3 +1,6 @@
+.note_name{
+   text-align: center;
+}
 .note_name a{
    text-decoration: none;
    color: rgb(56, 56, 56);
