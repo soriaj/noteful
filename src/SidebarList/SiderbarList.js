@@ -10,8 +10,8 @@ class SidebarList extends Component{
    render(){
       // console.log('Sidebar props: ', this.props.folders)
       // const { folders } = this.props
-      // console.log('SidebarList context: ', this.context.folders)
-      const { folders=[] } = this.context
+      // console.log('SidebarList context: ', this.context)
+      const { folders } = this.context
       return(
          <nav role='navigation' className='nav'>
             {folders.map(folder => 
@@ -22,7 +22,13 @@ class SidebarList extends Component{
                </div>
             )}
             <div className='nav_notes_add'>
-               <FontAwesomeIcon icon={faFolderPlus} /><NavLink className='nav_notes_button' to='#'> Add Folder</NavLink>
+               <FontAwesomeIcon icon={faFolderPlus} />
+                  <NavLink 
+                  className='nav_notes_button' 
+                  to='/add-folder'
+                  // onClick={() => this.context.addFolders()}
+                  > Add Folder
+                  </NavLink>
             </div>
          </nav>
       )

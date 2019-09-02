@@ -6,6 +6,7 @@ import Header from './Header/Header'
 import MainList from './MainList/MainList';
 import MainPage from './MainPage/MainPage';
 import NotesContext from './NoteContext';
+import AddFolder from './AddFolder/AddFolder';
 // import NOTES from './NOTES'
 import Config from './Config';
 import './App.css'
@@ -58,6 +59,9 @@ class App extends Component {
       console.error(err)
     })
   }
+  // componentWillUnmount(){
+  //   clearTimeout(this.timeout)
+  // }
   deleteNotes = noteId => {
     const newNotes = this.state.notes.filter(note => note.id !== noteId)
     console.log(`You just deleted ${noteId}`)
@@ -66,6 +70,9 @@ class App extends Component {
         notes: newNotes
       })
     }, 200)
+  }
+  addFolders = folder => {
+    this.setState({ folders: [...this.state.folders, folder] })
   }
   renderSidebarRoutes(){
     // const { notes, folders } = this.state;
@@ -82,7 +89,7 @@ class App extends Component {
             path='/note/:noteId'
             component={SidebarPage}
           />
-          <Route path="/add-folder" component={SidebarPage} />
+          <Route path="/add-folder" component={AddFolder} />
           <Route path="/add-note" component={SidebarPage} />
       </>
     );
@@ -111,6 +118,7 @@ class App extends Component {
       notes: this.state.notes,
       folders: this.state.folders,
       deleteNotes: this.deleteNotes,
+      addFolders: this.addFolders,
     }
     return (
       <Router>

@@ -1,0 +1,10 @@
+.add__folder{
+   text-align: center;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+
+}
+.AddFolder__form{
+   /* display: flex; */
+}
