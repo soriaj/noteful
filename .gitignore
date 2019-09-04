@@ -24,3 +24,4 @@ yarn-error.log*
 ./vscode
 set-react-default.sh
 somedata.js
+NOTES.js
