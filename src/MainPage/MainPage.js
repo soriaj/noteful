@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import Note from '../Note/Note'
-// import './NotePageMain.css'
+import React, { Component } from 'react';
+import Note from '../Note/Note';
+import './MainPage.css'
+import NotesContext from '../NoteContext'
 
 class MainPage extends Component{
    static defaultProps = {
@@ -8,17 +9,24 @@ class MainPage extends Component{
          content: '',
       }
    }
+   static contextType = NotesContext
+   handleDeleteNote = () => {
+         this.props.history.push(`/`)
+   }
    render(){
-      // console.log('MainPage props: ', this.props)
+      const { notes } = this.context
+      const { noteId } = this.props.match.params
+      const noteData = notes.find(note => note.id === noteId) || { content: ''}
       return(
-         <section>
+         <section className='main_note'>
             <Note
-               id={this.props.note.id}
-               name={this.props.note.name}
-               modified={this.props.modified}
+               id={noteData.id}
+               name={noteData.name}
+               modified={noteData.modified}
+               onDeleteNote={this.handleDeleteNote}
             />
             <div>
-               {this.props.note.content.split(/\n \r|\n/).map((para, idx) =>
+               {noteData.content.split(/\n \r|\n/).map((para, idx) =>
                   <p key={idx}>{para}</p>
                )}
             </div>

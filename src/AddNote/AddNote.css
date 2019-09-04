@@ -1,0 +1,31 @@
+.add__notes_form{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   line-height: 2rem;
+   margin-left: auto;
+   margin-right: auto;
+   width: 500px;
+}
+.folder_selection{
+   margin-top: 5px;
+   margin-bottom: 20px;
+   width: 240px;
+}
+form input[type=text]{
+   padding: 5px;
+   margin-bottom: 10px;
+}
+button{
+   padding: 10px;
+}
+button:hover{
+   background-color: rgba(30, 165, 243, 0.945)
+}
+button[type=reset]{
+   margin-right: 20px;
+   width: 80px;
+}
+button[type=submit]{
+   width: 80px;
+}

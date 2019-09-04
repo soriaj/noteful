@@ -1,22 +1,17 @@
 .nav {
-   /* background-color: #c5c5c5cc; */
    color: #fff;
    grid-area: sidebar;
-   /* height: 100%; */
-   /* overflow: auto; */
+   position: relative;
 }
-/* .nav > ul > li{
-   list-style: none;
-   padding: 5px;
-   margin-bottom: 5px;
-   
-} */
 .nav_notes_add {
    list-style: none;
    padding: 5px;
    margin-bottom: 5px;
    background-color: rgb(131, 131, 131);
    border-bottom: 2px outset rgba(131, 131, 131, 0.335);
+}
+.nav_notes_add:hover{
+   background-color: rgb(64, 104, 131);
 }
 .nav_notes_add > a {
    text-decoration: none;
@@ -30,6 +25,7 @@
    text-orientation: upright;
    width: 75px;
    writing-mode: vertical-lr;
+   padding: 15px;
 }
 .sidebarpage_back{
    margin: 0 15px;

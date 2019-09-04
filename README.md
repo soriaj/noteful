@@ -21,16 +21,20 @@ Install necessary node modules
 npm install
 ```
 
+## Install and run noteful-json-server
+```bash
+git clone https://github.com/tomatau/noteful-json-server
+cd ./noteful-json-server
+npm install
+npm start
+```
+
 ## Running App
 To run application start the app
 
 ```bash
 npm start
 ```
-
-## Notes
-Application is still in the design phase. Data is prepopulated from a dataset file NOTES.js
-Additonally functionality to add new notes and new folders will be added at a later time.
 
 ## Contributors
 Javier Soria

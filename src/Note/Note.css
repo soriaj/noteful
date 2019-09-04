@@ -1,6 +1,12 @@
+.note_name{
+   /* text-align: center; */
+}
 .note_name a{
    text-decoration: none;
-   color: Blue;
+   color: rgb(56, 56, 56);
+}
+.note_name a:hover{
+   color: rgb(144, 145, 212);
 }
 button{
    padding: 5px;
@@ -8,4 +14,7 @@ button{
    border-radius: 5px;
    background-color: rgba(128, 130, 131, 0.842);
    color: white;
+}
+.Note__delete:hover{
+   background-color: red;
 }
