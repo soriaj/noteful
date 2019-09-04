@@ -80,7 +80,6 @@ class AddNote extends Component {
          content: this.state.content.value
 
       }
-      console.log(note)
       fetch(`${Config.API_ENDPOINT}/notes`, {
          method: 'POST',
          body: JSON.stringify(note),
