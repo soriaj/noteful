@@ -5,16 +5,19 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import Moment from 'react-moment';
 import NotesContext from '../NoteContext';
 import Config from '../Config'
+import propTypes from 'prop-types';
 import './Note.css'
 
 class Note extends Component{
-   static defaultProps = {
-      onDeleteNote: () => {},
-   }
+   static propTypes = {
+      notes: propTypes.arrayOf(propTypes.shape({
+         id: propTypes.string.isRequired,
+         name: propTypes.string.isRequired,
+         modified: propTypes.string.isRequired
+      })),
+      onDeleteNote: propTypes.func
+   }  
    static contextType = NotesContext
-   handleStuff(){
-      console.log('you clicked the button')
-   }
    handleDelete = (event) => {
       event.preventDefault()
       const noteId = this.props.id
@@ -27,7 +30,7 @@ class Note extends Component{
       })
       .then(res => {
          if(!res.ok)
-            // return res.json().then(e => Promise.reject(e))
+            return res.json().then(e => Promise.reject(e))
          return res.json()
       })
       .then(() => {
@@ -38,9 +41,10 @@ class Note extends Component{
          console.log({error})
       })
    }
+   viewNote(path){
+      this.props.history.push(path);
+   }
    render(){
-      // console.log('Note props:', this.props)
-      // console.log('Notes context: ', this.context)
       return(
          <>
             <h2 className='note_name'>

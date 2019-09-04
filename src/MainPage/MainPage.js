@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Note from '../Note/Note';
-// import './NotePageMain.css'
+import './MainPage.css'
 import NotesContext from '../NoteContext'
-// import Config from '../Config';
 
 class MainPage extends Component{
    static defaultProps = {
@@ -19,7 +18,7 @@ class MainPage extends Component{
       const { noteId } = this.props.match.params
       const noteData = notes.find(note => note.id === noteId) || { content: ''}
       return(
-         <section>
+         <section className='main_note'>
             <Note
                id={noteData.id}
                name={noteData.name}

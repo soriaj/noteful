@@ -7,7 +7,7 @@ import MainList from './MainList/MainList';
 import MainPage from './MainPage/MainPage';
 import NotesContext from './NoteContext';
 import AddFolder from './AddFolder/AddFolder';
-// import NOTES from './NOTES'
+import AddNote from './AddNote/AddNote';
 import Config from './Config';
 import './App.css'
 
@@ -19,52 +19,28 @@ class App extends Component {
       notes: []
     }
   }
-  // componentDidMount(){
-  //   Promise.all([
-  //       fetch(`${Config.API_ENDPOINT}/folders`),
-  //       fetch(`${Config.API_ENDPOINT}/notes`)
-  //     ])
-  //     .then(([folderRes, notesRes]) => {
-  //       if(!folderRes.ok)
-  //         return folderRes.json().then(e => Promise.reject(e));
-  //       if(!notesRes.ok)
-  //         return notesRes.json().then(e => Promise.reject(e));
-
-  //       return Promise.all([folderRes.json(), notesRes.json()]);
-  //     })
-  //     .then(([folders, notes]) => {
-  //       this.setState({folders, notes});
-  //     })
-  //     .catch(error => {
-  //       console.log({error})
-  //     })
-  // }
   componentDidMount(){
     Promise.all([
-      fetch(`${Config.API_ENDPOINT}/folders`).then(res => {
-        if(!res.ok)
-          throw new Error('Something went wrong in folders')
-        return res.json()
-      }),
-      fetch(`${Config.API_ENDPOINT}/notes`).then(res => {
-        if(!res.ok)
-          throw new Error('Something went wrong in notes')
-        return res.json()
+        fetch(`${Config.API_ENDPOINT}/folders`),
+        fetch(`${Config.API_ENDPOINT}/notes`)
+      ])
+      .then(([folderRes, notesRes]) => {
+        if(!folderRes.ok)
+          return folderRes.json().then(e => Promise.reject(e));
+        if(!notesRes.ok)
+          return notesRes.json().then(e => Promise.reject(e));
+
+        return Promise.all([folderRes.json(), notesRes.json()]);
       })
-    ])
-    .then(([folders, notes]) => {
-      this.setState({folders, notes})
-    })
-    .catch(err => {
-      console.error(err)
-    })
+      .then(([folders, notes]) => {
+        this.setState({folders, notes});
+      })
+      .catch(error => {
+        console.log({error})
+      })
   }
-  // componentWillUnmount(){
-  //   clearTimeout(this.timeout)
-  // }
   deleteNotes = noteId => {
     const newNotes = this.state.notes.filter(note => note.id !== noteId)
-    console.log(`You just deleted ${noteId}`)
     setTimeout(() => {
       this.setState({
         notes: newNotes
@@ -74,8 +50,10 @@ class App extends Component {
   addFolders = folder => {
     this.setState({ folders: [...this.state.folders, folder] })
   }
+  addNotes = note => {
+    this.setState({ notes: [...this.state.notes, note]})
+  }
   renderSidebarRoutes(){
-    // const { notes, folders } = this.state;
     return (
         <>
           {['/', '/folder/:folderId'].map(path => (
@@ -90,7 +68,7 @@ class App extends Component {
             component={SidebarPage}
           />
           <Route path="/add-folder" component={AddFolder} />
-          <Route path="/add-note" component={SidebarPage} />
+          <Route path="/add-note" component={AddNote} />
       </>
     );
   }
@@ -119,6 +97,7 @@ class App extends Component {
       folders: this.state.folders,
       deleteNotes: this.deleteNotes,
       addFolders: this.addFolders,
+      addNotes: this.addNotes,
     }
     return (
       <Router>

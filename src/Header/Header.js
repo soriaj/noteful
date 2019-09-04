@@ -7,7 +7,6 @@ import './Header.css'
 
 class Header extends Component{
    render(){
-      // console.log('Header Props: ', this.props)
       return(
          <header role='banner' className='header'>
             <h1><span><FontAwesomeIcon icon={faStickyNote} /></span><NavLink to='/'>{' '}Noteful</NavLink></h1>

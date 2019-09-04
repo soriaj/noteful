@@ -12,6 +12,9 @@ class Main extends Component{
       notes: []
    }
    static contextType = NotesContext;
+   handleDeleteNote = () => {
+      this.props.history.push(`/`)
+   }
    render(){
       const { notes } = this.context
       const { folderId } = this.props.match.params
@@ -20,7 +23,6 @@ class Main extends Component{
            ? notes
            : notes.filter(note => note.folderId === folderId)
        )
-      // console.log('Main props: ', this.context.notes)
       return(
          <section>
             <ul>
@@ -30,14 +32,17 @@ class Main extends Component{
                         id={note.id}
                         name={note.name}
                         modified={note.modified}
-                        // onDeleteNote={this.context.deleteNote}
+                        onDeleteNote={this.handleDeleteNote}
                      />
                      <Sentences sentences={note.content} />
                   </li>
                )}
             </ul>
             <div className='note_add'>
-               <FontAwesomeIcon icon={faPlus} /><NavLink className='nav_notes_button' to='#'> Add Note</NavLink>
+               <FontAwesomeIcon icon={faPlus} />
+               <NavLink className='nav_notes_button' to='/add-note'> 
+                  Add Note
+               </NavLink>
             </div>
          </section>
       )

@@ -10,6 +10,10 @@ ul > li{
    width: 150px;
    border-radius: 5px;
    text-align: center;
+   
+}
+.note_add:hover{
+   background-color: rgba(30, 165, 243, 0.945)
 }
 .note_add > a {
    text-decoration: none;
@@ -19,7 +23,7 @@ ul > li{
 .note_item{
    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
    transition: 0.3s;
-   width: 80%;
+   width: 60%;
    padding: 10px;
    margin-bottom: 10px;
    background-color: #d8eef5b0;
