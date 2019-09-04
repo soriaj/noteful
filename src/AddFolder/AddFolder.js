@@ -35,8 +35,6 @@ class AddFolder extends Component {
    }
    handleSubmit(e){
       e.preventDefault();
-      console.log(`Submit was clicked`)
-      // const { name } = e.target
       const folder = {
          id: uuid4(),
          name: this.state.name.value
