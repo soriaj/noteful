@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 
 class Sentences extends Component{
+   static propTypes = {
+      sentences: propTypes.string
+   }
    render(){
-      // console.log('Sentences: ', this.props)
       const { sentences } = this.props
       return(
          <>

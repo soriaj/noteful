@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Note from '../Note/Note';
+import NoteError from '../NoteError/NoteError';
 import Sentences from '../Sentences/Sentence';
 import NotesContext from '../NoteContext';
 import './MainList.css'
@@ -24,6 +25,7 @@ class Main extends Component{
            : notes.filter(note => note.folderId === folderId)
        )
       return(
+         <NoteError>
          <section>
             <ul>
                {getNotesForFolder(notes, folderId).map(note => 
@@ -45,6 +47,7 @@ class Main extends Component{
                </NavLink>
             </div>
          </section>
+         </NoteError>
       )
    }
 }

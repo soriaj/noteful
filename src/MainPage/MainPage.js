@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Note from '../Note/Note';
 import './MainPage.css'
-import NotesContext from '../NoteContext'
+import NotesContext from '../NoteContext';
+import NoteError from '../NoteError/NoteError';
 
 class MainPage extends Component{
    static defaultProps = {
@@ -19,12 +20,14 @@ class MainPage extends Component{
       const noteData = notes.find(note => note.id === noteId) || { content: ''}
       return(
          <section className='main_note'>
+            <NoteError >
             <Note
                id={noteData.id}
                name={noteData.name}
                modified={noteData.modified}
                onDeleteNote={this.handleDeleteNote}
             />
+            </NoteError>
             <div>
                {noteData.content.split(/\n \r|\n/).map((para, idx) =>
                   <p key={idx}>{para}</p>
