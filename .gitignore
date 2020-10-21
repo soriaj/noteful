@@ -25,3 +25,4 @@ yarn-error.log*
 set-react-default.sh
 somedata.js
 NOTES.js
+.env

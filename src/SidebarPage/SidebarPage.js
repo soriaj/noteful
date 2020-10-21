@@ -11,8 +11,7 @@ class SidebarPage extends Component{
       const { noteId } = this.props.match.params
       const { notes, folders } = this.context
       const note = notes.find(note => note.id === noteId) 
-      const folderData = folders.find(folder => folder.id === note.folderId)
-      // console.log('Sidebar FolderData: ', folderData)
+      const folderData = folders.find(folder => folder.id === note.folder_id)
       return(
          <div className='.nav_notes_add'>
             {folderData && (

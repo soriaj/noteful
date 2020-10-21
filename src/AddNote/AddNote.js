@@ -76,9 +76,8 @@ class AddNote extends Component {
          id: uuid4(),
          name: this.state.name.value,
          modified: new Date(),
-         folderId: this.state.selected,
+         folder_id: this.state.selected,
          content: this.state.content.value
-
       }
       fetch(`${Config.API_ENDPOINT}/notes`, {
          method: 'POST',
